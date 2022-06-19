@@ -1,12 +1,29 @@
 <template>
-    <q-input v-model="text" :label="label" clearable clear-icon="close">
-    </q-input>
+    <q-input
+      v-model="iptValue"
+      :label="iptConfig.label"
+      :type="iptConfig.type || 'text'"
+      :rules="iptConfig.rules"
+      clearable clear-icon="close"/>
+    <!-- <pre>{{ iptConfig }}</pre> -->
 </template>
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 export default defineComponent({
   name: 'FormInput',
-  props: ['label'],
+  props: ['value', 'iptConfig'],
+  emits: ['update:value'],
+  setup(props, { emit }) {
+    const iptValue = computed({
+      get: () => props.value,
+      set: (val) => {
+        console.log(val);
+        emit('update:value', val);
+      },
+    });
+
+    return { iptValue };
+  },
 });
 </script>

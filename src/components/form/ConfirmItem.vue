@@ -18,10 +18,10 @@ import { ref } from 'vue';
 
 export default {
   name: 'ConfirmItem',
+  props: ['content'],
   setup() {
     return {
       confirm: ref(false),
-      content: ref(''),
     };
   },
 };
